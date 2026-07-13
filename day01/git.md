@@ -90,11 +90,11 @@ git remote add origin https://github.com/SSH-20/TIL_ssafy.git
 - remote : 설정하겠다
 - orgin 은 별명. 이름을 orgin으로 짓는 것은 오래된 관례
 
-git remote -v
-- 현재 연결되어있는 레포지토리의 리스트를 볼 수 있다.
-- fetch : 변동사항이 있는지 확인용
-- push : 업로드 용
-- pull : 내려받기 용
+- git remote -v
+  - 현재 연결되어있는 레포지토리의 리스트를 볼 수 있다.
+  - fetch : 변동사항이 있는지 확인용
+  - push : 업로드 용
+  - pull : 내려받기 용
 
 > 깃 허브에 업로드하는 방법
 - git push -u orgin master
