@@ -83,9 +83,9 @@ commit을 통해 수정된 파일은 status를 쳤을 때 나오지 않는다.
 - 내가 만든 원격 저장소에 이미 한 번이라도 작업을 했는가? 무언가 기록물이 남아있는가?
 
 > 깃 허브 레포지토리 연결 과정
-내 PC에 이미 생성된 레포지토리의 log를 깃 허브의 레포지토리에 연결할 것이다.
+내 PC에 이미 생성된 레포지토리의 log를 깃 허브의 레포지토리에 연결할 것이다.  
 
-git remote add origin https://github.com/SSH-20/TIL_ssafy.git
+-> git remote add origin https://github.com/SSH-20/TIL_ssafy.git
 
 - remote : 설정하겠다
 - orgin 은 별명. 이름을 orgin으로 짓는 것은 오래된 관례
@@ -116,3 +116,6 @@ git remote add origin https://github.com/SSH-20/TIL_ssafy.git
 -> git clone (주소)
 3. 복사된 디렉토리에 접속하여 작업을 진행한다.
 
+## 내려받기 동시작업
+- 복제를 한 파일을 수정하여 pull을 하면, 원본과 수정된 파일을 동시에 볼 수 있다.
+- 
