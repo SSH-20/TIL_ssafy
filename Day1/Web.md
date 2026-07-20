@@ -249,3 +249,25 @@ HTML 이란 웹 페이지의 의미와 구조를 정의하는 마크업 언어
 * 상속 되지 않는 속성은 주로 크기와 관련된 것들
 * 상속 되는 속성은 일관성을 갖게 하고 싶은 요소들
 
+## 프로필 제작 과제 리뷰
+### 과제 1번
+CSS를 사용해서 class를 구조화 한다.
+
+방법론
+1. OOCSS (Object Oriented CSS)
+  "m-20"이라는 클래스를 가진 모든 인스턴스들은 동일한 속성을 갖는다.
+  .m-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+2. BEM (Block Element Modifier)
+  Block : .card-profile
+  Element : .card-profile > div
+  Modifier : .card-profile --large
+--> 이름(변수명)으로 구조화 한다.
+
+* html 또한 구조화 하는 것이 가장 중요하다
+
+### 과제 2번
+자식 결합자, 자손 결합자
