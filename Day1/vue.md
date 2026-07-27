@@ -283,3 +283,127 @@ const myObj = ref({
 ## 동일 요소에 v-for와 v-if를 함께 사용하지 않는다.
 동일한 요소에서 v-if가 v-for 보다 우선순위가 더 높기 때문
 * v-if에서 조건은 v-for 범위 변수에 접근할 수 없음
+
+# 7월 27일
+# Passing Props
+
+### 같은 데이터 but 다른 컴포넌트
+- 동일한 사진 데이터가 다양한 위치에서 여러번 출력된다 가정할 때
+- 사진 데이터는 어떻게 관리해야 하는가?
+- "공통된 부모 컴포넌트에서 관리하자!"
+
+## Passing Props
+- 부모는 자식에게 데이터를 전달(Pass Props)하며, 자식은 자신에게 일어난 일을 부모에게 알림 (Emit event)
+
+## Props
+부모 컴포넌트로부터 자식 컴포넌트로 데이터를 전달하는데 사용되는 속성
+
+## Props 특징
+- 부모 속성이 업데이트 되면 자식으로 전달 되지만 그 반대는 안 됨
+- 즉, 자식 컴포넌트 내부에서 Props를 변경하려고 시도해서는 안되며 불가능
+- 또한 부모 컴포넌트가 업데이트될 때마다 이를 사용하는 자식 컴포넌트의 모든 Props가 최신 값으로 업데이트 됨
+> 부모 컴포넌트에서만 변경하고 이를 내ㅕㄹ받는 자식 컴포넌트는 자연스럽게 갱신
+
+## One-Way Data Flow
+모든 Props는 자식 속성과 부모 속성 사이에 하향식 단방향 바인딩을 형성
+
+### Data를 Props 하는 방법
+```
+<ParentChild
+    my-msg="Hello, vue"
+  />
+```
+
+### 컴포넌트 prop 작성시 주의할 점
+- 부모 컴포넌트로부터
+- 넘겨받은 (prop) 데이터
+- prop 데이터는 여러개?
+  - 여러개의 데이터를 받는법 : Array to Object
+  - 여기는 JS 적는곳 속성명은 camelCase
+  - 케밥 케이스는 - 를 쓰는데 이는 마이너스 연산자로 인식함
+
+- 주의할 점. props에 접근가능하다는 뜻이 아님
+- 그 내려받은 데이터를 바꿔도 된다는 소리 아님
+- [Vue warn] Set operation on key "myMsg" faild: target is readonly
+- props.myMsg = 'bye, Vue'
+- prop 받은 데이터가 Object야...
+- 그럼 그 Object의 속성은 변경이 가능해져버림..
+
+### Component Evnets
+부모는 자식에게 데이터 전달(Pass Props)하며, 자식은 자신에게 일어난 일을 부모에게 알림(Emit Evnet)
+
+## $emit()
+자식 컴포넌트가 이벤트를 발생시켜 부모 컴포넌트로 데이터를 전달하는 역할의 메서드
+
+### emit 메서드 구조
+- $emit(event, ...arg)
+  - event
+    - 커스텀 이벤트 이름
+  - args
+    - 추가 인자
+
+### 컴포넌트들의 상태관리
+- 데이터를 관리하는 주체의 컴포넌트에서 변경하는 것이 맞다.
+- 자식 컴포넌트는 직접 변경해선 안 된다.
+
+
+## computed()
+"계산된 속성"을 정의하는 함수
+* 미리 계산해두는 것
+> 미리 계산된 속성을 사용하여 템플릿에서 표현식을 단순하게 하고 불필요한 반복 연산을 줄임
+
+### computed 기본 예시
+
+
+### 그래서 computed 왜 쓰는가?
+- 캐시해서 쓰려고
+
+### Cache
+- 데이터나 결과를 일시적으로 저장해두는 임시 저장소
+- 이후에 같은 데이터나 결과를 다시 계산하지 않고 빠르게 접근할 수 있도록 함.
+
+### Computed가 실행되는 시점
+- computed가 들어있는 컴포넌트가 생성되는 시점
+
+## watcher
+### watch()
+하나 이상의 반응형 데이터를 감시하고, 감시하는 데이터가 변경되면 콜백 함수를 호출
+
+## watch() 구조
+```
+watch(source, (newValue, oldValue) => {
+  // do somthing
+})
+```
+
+- 첫번째 인자 (source)
+  - watch가 감시하는 대상(반응형 변수, 값을 반환하는 함수 등)
+- 두번째 인자 (callback function)
+  - source가 변경될 때 호출되는 콜백 함수
+  1. newValue
+    - 감시하는 대상이 변화된 값
+  2. oldValue(optional)
+    - 감시하는 대상의 기존 값
+
+### watch쓸 때 주의할 점
+```
+watch(count, (newValue, oldValue) => {
+    console.log(`newValue: ${newValue}, oldValue: ${oldValue}`)
+    count.value++
+  })
+```
+* 감시하는 데이터를 내가 증가시키면 감지 -> 증가 -> 감지 -> 증가 -> 감지 -> ... 무한 반복을 한다.
+
+### Computed Vs Watcher
+![스크린샷](./computed-vs-watcher.png)
+
+## Lifecycle Hooks
+Vue 인스턴스의 생애주기 동안 특정 시점에 실행되는 함수
+
+- 인스턴스의 생애 주기 중간 중간에 함수를 제공하여 개발자가 특정 단계에서 원하는 로직을 작성할 수 있도록 함
+
+### Lifecycle Hooks 예시
+1. Vue 컴포넌트 인스턴스가 초기 렌더링 및 DOM 요소 생성이 완료된 후 특정 로직을 수행하기
+  - 데이터를 onMounted할 때, 데이터를 불러온다.
+2. 반응형 데이터의 변경으로 인해 컴포넌트의 DOM이 업데이트된 후 특정 로직을 수행하기
+3. 반응형 데이터의 변경으로 컴포넌트의 DOM이 업데이트된 후 특정 로직을 수행하기
